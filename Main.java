@@ -1,16 +1,20 @@
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-        // Create list
-        List<Employee> employees = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
-        int message = -1;
 
-        while (message != 8){
+        // 1. Create the EmployeeManager instance
+        EmployeeManager manager = new EmployeeManager();
+
+        int message = -1; // initialize to a non-exit value
+
+        // 2. Menu loop
+        while (message != 8) {
+
+            // Print menu each iteration
             System.out.println("\nChoose an option:");
             System.out.println("1. Add Employee");
             System.out.println("2. Remove Employee");
@@ -21,44 +25,81 @@ public class Main {
             System.out.println("7. Load from File");
             System.out.println("8. Exit");
 
-             // 2. Read input
+            // Read input
             message = Integer.parseInt(scanner.nextLine());
 
-           switch(message){
-            case 1 :
-                System.out.println("1. Add Employee");
-                break;
-            case 2:
-                System.out.println("2. Remove Employee");
-                break ;
-            case 3 :
-                System.out.println("3. Update Employee");
-                break;
-            case 4:
-                System.out.println("4. Search Employee");
-                break ;
-            case 5:
-                System.out.println("5. List All");
-                break;
-            case 6:
-                System.out.println("6. Save to File");
-                break ;
-            case 7:
-                System.out.println("7. Load from File");
-                break;
-            case 8:
-                System.out.println("8. Exit");
-                break ;
-           }  
+            // Handle selection
+            switch (message) {
+
+                case 1: // Add Employee
+                    System.out.println("Adding a new Employee:");
+
+                    System.out.println("Enter first name:");
+                    String firstName = scanner.nextLine();
+
+                    System.out.println("Enter last name:");
+                    String lastName = scanner.nextLine();
+
+                    System.out.println("Enter employment type:");
+                    String employeeType = scanner.nextLine();
+
+                    System.out.println("Enter department:");
+                    String department = scanner.nextLine();
+
+                    System.out.println("Enter job:");
+                    String job = scanner.nextLine();
+
+                    // Create Employee object
+                    Employee emp = new Employee(firstName, lastName, employeeType, department, job);
+
+                    // Call manager to store employee
+                    manager.addEmployee(emp);
+
+                    System.out.println("Employee added successfully!");
+                    break;
+
+                case 2: // Remove Employee
+                    System.out.println("Removing an Employee:");
+                    // TODO: Prompt user for identifier (e.g., full name)
+                    // TODO: Call manager.removeEmployee(identifier)
+                    break;
+
+                case 3: // Update Employee
+                    System.out.println("Updating an Employee:");
+                    // TODO: Prompt user for identifier + new fields
+                    // TODO: Call manager.updateEmployee(identifier, newData)
+                    break;
+
+                case 4: // Search Employee
+                    System.out.println("Searching for an Employee:");
+                    // TODO: Prompt user for identifier
+                    // TODO: Call manager.findEmployee(identifier)
+                    break;
+
+                case 5: // List All Employees
+                    System.out.println("Listing all Employees:");
+                    // TODO: Call manager.listAllEmployees() and loop to print
+                    break;
+
+                case 6: // Save to File
+                    System.out.println("Saving employees to file:");
+                    // TODO: Call manager.saveToFile()
+                    break;
+
+                case 7: // Load from File
+                    System.out.println("Loading employees from file:");
+                    // TODO: Call manager.loadFromFile()
+                    break;
+
+                case 8: // Exit
+                    System.out.println("Exiting program...");
+                    break;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
         }
 
-        // Add employees
-        // employees.add(new Employee("John", "Doe", EmployeeType.FULL_TIME, Department.ENGINEERING, "Software Engineer"));
-        // employees.add(new Employee("Jane", "Smith", EmployeeType.INTERN, Department.HR, "HR Intern"));
-
-        // // Iterate and print full names
-        // for (Employee e : employees) {
-        //     System.out.println(e.getFullName() + " - " + e.getJob());
-        // }
+        scanner.close();
     }
 }
