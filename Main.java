@@ -54,41 +54,35 @@ public class Main {
 
                     // Call manager to store employee
                     manager.addEmployee(emp);
-
                     System.out.println("Employee added successfully!");
                     break;
 
                 case 2: // Remove Employee
                     System.out.println("Removing an Employee:");
-                    // TODO: Prompt user for identifier (e.g., full name)
-                    // TODO: Call manager.removeEmployee(identifier)
+                    manager.RemoveEmployee();
                     break;
 
                 case 3: // Update Employee
                     System.out.println("Updating an Employee:");
-                    // TODO: Prompt user for identifier + new fields
-                    // TODO: Call manager.updateEmployee(identifier, newData)
                     break;
 
                 case 4: // Search Employee
-                    System.out.println("Searching for an Employee:");
-                    // TODO: Prompt user for identifier
-                    // TODO: Call manager.findEmployee(identifier)
+                    manager.findEmployee();
                     break;
 
                 case 5: // List All Employees
                     System.out.println("Listing all Employees:");
-                    // TODO: Call manager.listAllEmployees() and loop to print
+                    manager.listAllEmployees();
                     break;
 
                 case 6: // Save to File
                     System.out.println("Saving employees to file:");
-                    // TODO: Call manager.saveToFile()
+                    manager.saveToFile();
                     break;
 
                 case 7: // Load from File
                     System.out.println("Loading employees from file:");
-                    // TODO: Call manager.loadFromFile()
+                    manager.loadFromFile();
                     break;
 
                 case 8: // Exit
