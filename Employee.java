@@ -1,21 +1,19 @@
-  // Controlled types for scalability
-enum EmployeeType {
-    INTERN, FULL_TIME, CONTRACTOR
-}
-
-enum Department {
-    ENGINEERING, HR, SALES, MARKETING
-}
+import java.util.UUID;
 
 public class Employee {
+
+    private final String id;   // immutable unique identifier
     private String firstName;
     private String lastName;
     private String employeeType;
     private String department;
     private String job;
 
-    // Constructor: only required fields for valid employee
-    public Employee(String firstName, String lastName, String employeeType, String department, String job) {
+    // Constructor: UUID is generated internally
+    public Employee(String firstName, String lastName,
+                    String employeeType, String department, String job) {
+
+        this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeType = employeeType;
@@ -23,17 +21,26 @@ public class Employee {
         this.job = job;
     }
 
-    // ====== Getters ======
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    // Getter only (NO setter for ID)
+    public String getID() {
+        return id;
     }
 
     public String getFullName() {
-        return firstName + " " + lastName; // derive on demand
+        return firstName + " " + lastName;
+    }
+
+    // setters & getters
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setEmployeeType(String employeeType) {
+        this.employeeType = employeeType;
     }
 
     public String getEmployeeType() {
@@ -47,27 +54,4 @@ public class Employee {
     public String getJob() {
         return job;
     }
-
-    // ====== Setters ======
-    // Only mutate things that can change in real life
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public void setEmployeeType(String employeeType) {
-        this.employeeType = employeeType;
-    }
-
-    // ====== Behavior Example ======
-    // public boolean isFullTime() {
-    //     return this.employeeType == EmployeeType.FULL_TIME;
-    // }
-
-    // public boolean isEligibleForPromotion() {
-    //     return this.employeeType != EmployeeType.INTERN && this.job != null;
-    // }
 }

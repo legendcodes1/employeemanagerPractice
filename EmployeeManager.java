@@ -4,54 +4,64 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.*;
 import java.util.*;
-
+import java.nio.file.Paths;
 public class EmployeeManager {
 
     List<Employee> employees = new ArrayList<>();
+    HashMap<String, Employee> employeeMap = new HashMap<>();
     Employee emp ;
     Scanner scanner = new Scanner(System.in);
     // FileWriter writer = new FileWriter("employees.txt");
     public void addEmployee(Employee emp) {
-        employees.add(emp);
+        employeeMap.put(emp.getID(), emp);
     }
 
      public void UpdateEmployee() {
-        System.out.println("Whats the Employees first name that you are trying to update");
-        String employee = scanner.nextLine();
-        System.out.println("What are trying to update name, department or employeement type");
-        for(int i = 0; i < employees.size(); i++){
-            if (employees.get(i).getFirstName().equalsIgnoreCase(employee)){
-                employees.get(i).setDepartment(employee);
+        System.out.println("Whats the Employees ID that you are trying to update");
+        String id = scanner.nextLine();
+        emp = employeeMap.get(id);
+
+        if (emp != null){
+            System.out.println("What are you trying to update [last name, department or employeement type]: ");
+            String choice = scanner.nextLine();
+
+            if(choice.equalsIgnoreCase("Department")){
+                  emp.setDepartment(choice); 
+            }else if(choice.equalsIgnoreCase("Employeement type")){
+                emp.setEmployeeType(choice);
+            }else if(choice.equalsIgnoreCase("Last name")){
+                emp.setLastName(choice);
             }
+            System.out.println("Updated successfully");
+        }else{
+            System.out.println("Employee does not exists");
         }
     }
 
      public void findEmployee() {
-        System.out.println("What is the Employees first Name");
-        String name = scanner.nextLine();
+        System.out.println("What is the Employees ID: ");
+        String id = scanner.nextLine();
+        emp = employeeMap.get(id);
 
-        for(int i =0; i < employees.size(); i++){
-            if (employees.get(i).getFirstName().equalsIgnoreCase(name)){
-                System.out.println("Full name :" + employees.get(i).getFullName()   + "\n " 
-                + "Employment Type:" + employees.get(i).getEmployeeType() + "\n " 
-                + "Department: " + employees.get(i).getDepartment() + "\n " 
-                + "Job: " + employees.get(i).getJob()
+            if (emp != null){
+                System.out.println("Full name :" + emp.getFullName()   + "\n " 
+                + "Employment Type:" + emp.getEmployeeType() + "\n " 
+                + "Department: " + emp.getDepartment() + "\n " 
+                + "Job: " + emp.getJob()
             );
             } else{
                 System.out.println("Employee not found");
             }
         }
-    }
 
     public void listAllEmployees(){
-        for(int i =0; i < employees.size(); i++){
-            // Employee currentEmployee = employees.get(i);
-            if (employees.size() > 0){
-                System.out.println(employees.get(i).getFullName());
-            }else{
-                System.out.println("No employees exist add one");
-                }
+       if(employeeMap.isEmpty()){
+        System.out.println("No employees exist. Add one first");
+       }else{
+        for(Employee emp: employeeMap.values()){
+            System.out.println("ID: " + emp.getID() + "\n " +  "Full name: " + emp.getFullName() + "\n " +  "Job: " + emp.getJob());
         }
+       }
     }
 
     public void RemoveEmployee() {
@@ -75,7 +85,7 @@ public class EmployeeManager {
           }
     }
 
-        public void loadFromFile(){
+    public void loadFromFile(){
         try(Scanner scanner = new Scanner(Paths.get("output.txt"))) {
             while(scanner.hasNextLine()){
                 String row = scanner.nextLine();
