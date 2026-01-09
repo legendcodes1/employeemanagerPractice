@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -16,21 +16,16 @@ public class EmployeeManager {
         employeeMap.put(emp.getID(), emp);
     }
 
-     public void UpdateEmployee() {
-        System.out.println("Whats the Employees ID that you are trying to update");
-        String id = scanner.nextLine();
+     public void UpdateEmployee(String id, String field, String newValue) {
         emp = employeeMap.get(id);
 
         if (emp != null){
-            System.out.println("What are you trying to update [last name, department or employeement type]: ");
-            String choice = scanner.nextLine();
-
-            if(choice.equalsIgnoreCase("Department")){
-                  emp.setDepartment(choice); 
-            }else if(choice.equalsIgnoreCase("Employeement type")){
-                emp.setEmployeeType(choice);
-            }else if(choice.equalsIgnoreCase("Last name")){
-                emp.setLastName(choice);
+            if(field.equalsIgnoreCase("Department")){
+                  emp.setDepartment(newValue); 
+            }else if(field.equalsIgnoreCase("Employement type")){
+                emp.setEmployeeType(newValue);
+            }else if(field.equalsIgnoreCase("Last name")){
+                emp.setLastName(newValue);
             }
             System.out.println("Updated successfully");
         }else{
@@ -38,11 +33,8 @@ public class EmployeeManager {
         }
     }
 
-     public void findEmployee() {
-        System.out.println("What is the Employees ID: ");
-        String id = scanner.nextLine();
+     public void findEmployee(String id) {
         emp = employeeMap.get(id);
-
             if (emp != null){
                 System.out.println("Full name :" + emp.getFullName()   + "\n " 
                 + "Employment Type:" + emp.getEmployeeType() + "\n " 
@@ -94,5 +86,10 @@ public class EmployeeManager {
         }catch (Exception e){
             System.out.println("Error:" + e.getMessage());
         }
+    }
+
+
+    public void sortEmployeeByName(){
+
     }
 }

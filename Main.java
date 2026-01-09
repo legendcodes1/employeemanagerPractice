@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Main {
 
@@ -33,7 +34,8 @@ public class Main {
 
                 case 1: // Add Employee
                     System.out.println("Adding a new Employee:");
-
+                    UUID uuid = UUID.randomUUID();
+                    String id = uuid.toString();
                     System.out.println("Enter first name:");
                     String firstName = scanner.nextLine();
 
@@ -63,11 +65,29 @@ public class Main {
                     break;
 
                 case 3: // Update Employee
-                    System.out.println("Updating an Employee:");
+                    System.out.println("Whats the Employees ID that you are trying to update");
+                    String empid = scanner.nextLine();
+                    System.out.println("What are you trying to update [last name, department or employeement type]: ");
+                    String choice = scanner.nextLine();
+                    if (choice.equalsIgnoreCase("Last name")){
+                        System.out.println("Whats the new name");                        
+                        String nameChange = scanner.nextLine();
+                        manager.UpdateEmployee(empid, "Last name",nameChange);
+                    } else if(choice.equalsIgnoreCase("Department")){
+                        System.out.println("Whats the new Department");                        
+                        String departmentChange = scanner.nextLine();
+                        manager.UpdateEmployee(empid, "Department", departmentChange);
+                    }else{
+                        System.out.println("Whats the new employement type");                        
+                        String employeementChange = scanner.nextLine();
+                        manager.UpdateEmployee(empid,"Employement type" ,employeementChange);
+                    }
                     break;
 
                 case 4: // Search Employee
-                    manager.findEmployee();
+                    System.out.println("What is the Employees ID: ");
+                    String foundid = scanner.nextLine();
+                    manager.findEmployee(foundid);
                     break;
 
                 case 5: // List All Employees
